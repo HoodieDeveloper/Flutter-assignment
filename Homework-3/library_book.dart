@@ -17,6 +17,7 @@ void main() {
       print("Book add fail.\n");
     }
   }
+  //Remove item
   void removeItem( List<String>books){
     stdout.write("Please enter book name : ");
     String? item = stdin.readLineSync();
@@ -30,8 +31,7 @@ void main() {
     }
 
   }
-
-
+  //View item
   void showItem(List<String>books){
     print("All book in library : \n");
    for (int i =0 ; i < books.length ; i++){
@@ -39,7 +39,7 @@ void main() {
    }
    print("");
   }
-
+//Search Item
   void searchItem(List<String>books){
     stdout.write("Please enter book name to search : ");
     String? item = stdin.readLineSync();
@@ -54,12 +54,12 @@ void main() {
     }
 
   }
-
+//Count Item
   void countItem(List<String>books){
       print("So book that are in our library is ${books.length} books\n");
 
   }
-
+//Main run program
   do {
     print("<<<<<<<<<< Welcome to our library system management system >>>>>>>>>");
     stdout.write("Please chose one to manage : \n");
@@ -90,7 +90,6 @@ void main() {
     else {
       ch=false;
     }
-
   } while(ch);
 }
 
