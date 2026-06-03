@@ -48,8 +48,11 @@ void main() {
     else if (choice == '3') {
       showItem(f1);
     }
-    else {
+    else if(choice=="4"){
       ch =false;
+    }
+    else{
+      print("invalid choice!");
     }
   }while (ch);
 }
