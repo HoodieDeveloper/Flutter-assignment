@@ -9,7 +9,7 @@ void main() {
     stdout.write("Please enter book name : ");
     String? item = stdin.readLineSync();
 
-    if(item !=null && item.isNotEmpty){
+    if(item !=null){
       books.add(item);
       print("Book add successfully\n");
     }
@@ -22,7 +22,7 @@ void main() {
     stdout.write("Please enter book name : ");
     String? item = stdin.readLineSync();
 
-    if(item !=null && item.isNotEmpty){
+    if(item !=null ){
       books.remove(item);
        print("Book remove successfully\n");
     }
@@ -44,7 +44,7 @@ void main() {
     stdout.write("Please enter book name to search : ");
     String? item = stdin.readLineSync();
 
-     if(item !=null && item.isNotEmpty){
+     if(item !=null){
       if(books.contains(item)){
         print("$item found in our library.\n");
       }
