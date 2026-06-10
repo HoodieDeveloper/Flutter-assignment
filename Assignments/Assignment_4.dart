@@ -5,23 +5,34 @@ import 'dart:io';
 class BankAccount {
   int accountNumber = 222;
   double balance = 100;
-  String? userName;
-  String? password;
+  String userName;
+  String password;
 
-  BankAccount(this.userName,this.password);
+  BankAccount(this.userName, this.password);
+
   List<String> history = [];
+
+  String formatMoney(double money) {
+    if (money == money.toInt()) {
+      return money.toInt().toString();
+    } else {
+      return money.toStringAsFixed(2);
+    }
+  }
 
   void depositMoney() {
     stdout.write("Please enter money you want to add: ");
     String? input = stdin.readLineSync();
 
-    int? add = int.tryParse(input ?? "");
+    double? add = double.tryParse(input ?? "");
 
     if (add != null && add > 0) {
       balance = balance + add;
-      history.add("Deposit: \$${add}");
+      history.add("Deposit: \$${formatMoney(add)}");
+
       print("Deposit successful!");
-      print("Your deposit money is \$${add}");
+      print("Your deposit money is \$${formatMoney(add)}");
+      print("Your new balance is \$${formatMoney(balance)}");
     } else {
       print("Invalid amount");
     }
@@ -31,14 +42,16 @@ class BankAccount {
     stdout.write("Please enter money you want to withdraw: ");
     String? input = stdin.readLineSync();
 
-    int? remove = int.tryParse(input ?? "");
+    double? remove = double.tryParse(input ?? "");
 
     if (remove != null && remove > 0) {
       if (remove <= balance) {
         balance = balance - remove;
-        history.add("Withdraw: \$${remove}");
+        history.add("Withdraw: \$${formatMoney(remove)}");
+
         print("Withdraw successful!");
-        print("Your withdraw money is \$${remove}");
+        print("Your withdraw money is \$${formatMoney(remove)}");
+        print("Your new balance is \$${formatMoney(balance)}");
       } else {
         print("Not enough balance");
       }
@@ -49,24 +62,24 @@ class BankAccount {
 }
 
 class BankingUpgrade extends BankAccount {
-  
-  BankingUpgrade( String userName, String password):super(userName,password);
+  BankingUpgrade(String userName, String password) : super(userName, password);
 
   void calculateInterest() {
     stdout.write("Enter interest rate (%): ");
     String? input = stdin.readLineSync();
 
-    int? rate = int.tryParse(input ?? "");
+    double? rate = double.tryParse(input ?? "");
 
     if (rate != null && rate > 0) {
       double interest = balance * rate / 100;
       balance = balance + interest;
 
-      history.add("Interest added: \$${interest}");
+      history.add("Interest added: \$${formatMoney(interest)}");
+
       print("Interest added successfully!");
-      print("Interest amount is \$${interest}");
-    } 
-    else {
+      print("Interest amount is \$${formatMoney(interest)}");
+      print("Your new balance is \$${formatMoney(balance)}");
+    } else {
       print("Invalid interest rate");
     }
   }
@@ -76,8 +89,7 @@ class BankingUpgrade extends BankAccount {
 
     if (history.isEmpty) {
       print("No transaction yet");
-    } 
-    else {
+    } else {
       for (int i = 0; i < history.length; i++) {
         print("[${i + 1}] ${history[i]}");
       }
@@ -88,12 +100,12 @@ class BankingUpgrade extends BankAccount {
     bool choice = true;
 
     print("<<<<<< Welcome to Wife bank >>>>>>");
-    print("Please enter user name and password to login");
+    print("Please enter username and password to login");
 
-    stdout.write("Username : ");
+    stdout.write("Username: ");
     String? name = stdin.readLineSync();
 
-    stdout.write("Password : ");
+    stdout.write("Password: ");
     String? pass = stdin.readLineSync();
 
     if (name == userName && pass == password) {
@@ -101,7 +113,7 @@ class BankingUpgrade extends BankAccount {
         print("");
         print("<<<<<< Welcome back $userName >>>>>>");
         print("Your account number is $accountNumber");
-        print("Your balance is \$$balance");
+        print("Your balance is \$${formatMoney(balance)}");
         print("Please choose one below to make transaction:");
         print("1. Deposit");
         print("2. Withdraw");
@@ -109,7 +121,7 @@ class BankingUpgrade extends BankAccount {
         print("4. Transaction History");
         print("5. Exit");
 
-        stdout.write("Enter here : ");
+        stdout.write("Enter here: ");
         String? ch = stdin.readLineSync();
 
         if (ch == "1") {
@@ -134,6 +146,6 @@ class BankingUpgrade extends BankAccount {
 }
 
 void main() {
-  BankingUpgrade bank = BankingUpgrade("Sak","123");
+  BankingUpgrade bank = BankingUpgrade("Sak", "123");
   bank.login();
 }
