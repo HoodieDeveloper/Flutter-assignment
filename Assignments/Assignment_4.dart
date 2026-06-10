@@ -5,9 +5,10 @@ import 'dart:io';
 class BankAccount {
   int accountNumber = 222;
   double balance = 100;
-  String userName = "Sak";
-  String password = "123";
+  String? userName;
+  String? password;
 
+  BankAccount(this.userName,this.password);
   List<String> history = [];
 
   void depositMoney() {
@@ -48,6 +49,9 @@ class BankAccount {
 }
 
 class BankingUpgrade extends BankAccount {
+  
+  BankingUpgrade( String userName, String password):super(userName,password);
+
   void calculateInterest() {
     stdout.write("Enter interest rate (%): ");
     String? input = stdin.readLineSync();
@@ -130,6 +134,6 @@ class BankingUpgrade extends BankAccount {
 }
 
 void main() {
-  BankingUpgrade bank = BankingUpgrade();
+  BankingUpgrade bank = BankingUpgrade("Sak","123");
   bank.login();
 }
