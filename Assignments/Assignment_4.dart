@@ -31,7 +31,7 @@ class BankAccount {
     stdout.write("Please enter money you want to withdraw: ");
     String? input = stdin.readLineSync();
 
-    double? remove = double.tryParse(input ?? "");
+    int? remove = int.tryParse(input ?? "");
 
     if (remove != null && remove > 0) {
       if (remove <= balance) {
